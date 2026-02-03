@@ -1,4 +1,4 @@
-name: Fronrend Image Build And Push 
+name: Frontend Image Build And Push 
 
 on:
   push:
