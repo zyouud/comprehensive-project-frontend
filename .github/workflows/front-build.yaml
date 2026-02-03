@@ -14,16 +14,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+        - name: Pulling the repo to the runner
+          uses: actions/checkout@v4
+        
+        - name: Logging into the rgithub account
+          uses: docker/login-action@v3
+          with:
+            registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: docker/build-push-action@v5
-        with:
-          push: true
-          tags: ghcr.io/${{ github.repository }}:latest
+        - name: Building and pushing the images into the github ghcr
+          uses: docker/build-push-action@v5
+          with:
+            push: true
+            tags: ghcr.io/${{ github.repository }}:latest
         
