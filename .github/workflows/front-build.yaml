@@ -1,10 +1,14 @@
-name: Frontend Image Build And Push 
+name: Fronrend Image Build And Push 
 
 on:
   push:
     branches:
       - main
-
+      
+permissions:
+  contents: read
+  packages: write
+  
 jobs:
   build:
     runs-on: ubuntu-latest
